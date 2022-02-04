@@ -1,0 +1,118 @@
+{
+  "uid" : "e0955104d87b2607",
+  "name" : "blog",
+  "fullName" : "com.trionxt.webdriver.scenarios.DemoTest.blog",
+  "historyId" : "436693ecc2dbb68737e415dad52a9b35",
+  "time" : {
+    "start" : 1642486737752,
+    "stop" : 1642486742498,
+    "duration" : 4746
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "callStartRecording",
+    "time" : {
+      "start" : 1642486734490,
+      "stop" : 1642486737742,
+      "duration" : 3252
+    },
+    "description" : "",
+    "status" : "unknown",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  }, {
+    "name" : "setup",
+    "time" : {
+      "start" : 1642486686601,
+      "stop" : 1642486716988,
+      "duration" : 30387
+    },
+    "description" : "",
+    "status" : "unknown",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "callStopRecording",
+    "time" : {
+      "start" : 1642486742544,
+      "stop" : 1642486746487,
+      "duration" : 3943
+    },
+    "description" : "",
+    "status" : "unknown",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  }, {
+    "name" : "close",
+    "time" : {
+      "start" : 1642486796769,
+      "stop" : 1642486865000,
+      "duration" : 68231
+    },
+    "description" : "",
+    "status" : "unknown",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "package",
+    "value" : "com.trionxt.webdriver.scenarios.DemoTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.trionxt.webdriver.scenarios.DemoTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "blog"
+  }, {
+    "name" : "parentSuite",
+    "value" : "First Suite"
+  }, {
+    "name" : "suite",
+    "value" : "loginTest1"
+  }, {
+    "name" : "subSuite",
+    "value" : "com.trionxt.webdriver.scenarios.DemoTest"
+  }, {
+    "name" : "host",
+    "value" : "Shubham-PC"
+  }, {
+    "name" : "thread",
+    "value" : "2788@Shubham-PC.main(1)"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "e0955104d87b2607.json",
+  "parameterValues" : [ ]
+}

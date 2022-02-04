@@ -1,0 +1,118 @@
+{
+  "uid" : "f4bc538a109db5ec",
+  "name" : "login3",
+  "fullName" : "com.trionxt.webdriver.scenarios.DemoTest.login3",
+  "historyId" : "2940786e82604da18f4d04361442cada",
+  "time" : {
+    "start" : 1642486173041,
+    "stop" : 1642486177048,
+    "duration" : 4007
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "callStartRecording",
+    "time" : {
+      "start" : 1642486170121,
+      "stop" : 1642486173037,
+      "duration" : 2916
+    },
+    "description" : "",
+    "status" : "unknown",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  }, {
+    "name" : "setup",
+    "time" : {
+      "start" : 1642486060939,
+      "stop" : 1642486082626,
+      "duration" : 21687
+    },
+    "description" : "",
+    "status" : "unknown",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "callStopRecording",
+    "time" : {
+      "start" : 1642486177052,
+      "stop" : 1642486180910,
+      "duration" : 3858
+    },
+    "description" : "",
+    "status" : "unknown",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  }, {
+    "name" : "close",
+    "time" : {
+      "start" : 1642486180982,
+      "stop" : 1642486187805,
+      "duration" : 6823
+    },
+    "description" : "",
+    "status" : "unknown",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "package",
+    "value" : "com.trionxt.webdriver.scenarios.DemoTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.trionxt.webdriver.scenarios.DemoTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "login3"
+  }, {
+    "name" : "parentSuite",
+    "value" : "First Suite"
+  }, {
+    "name" : "suite",
+    "value" : "loginTest4"
+  }, {
+    "name" : "subSuite",
+    "value" : "com.trionxt.webdriver.scenarios.DemoTest"
+  }, {
+    "name" : "host",
+    "value" : "Shubham-PC"
+  }, {
+    "name" : "thread",
+    "value" : "1524@Shubham-PC.main(1)"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "f4bc538a109db5ec.json",
+  "parameterValues" : [ ]
+}

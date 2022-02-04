@@ -1,0 +1,180 @@
+{
+  "uid" : "b9ca347c893da7a8",
+  "name" : "login2",
+  "fullName" : "com.trionxt.webdriver.scenarios.DemoTest.login2",
+  "historyId" : "879fa06f69c345a2aae7cc07eebdec6",
+  "time" : {
+    "start" : 1643625432457,
+    "stop" : 1643625438156,
+    "duration" : 5699
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "callStartRecording",
+    "time" : {
+      "start" : 1643625428718,
+      "stop" : 1643625432454,
+      "duration" : 3736
+    },
+    "description" : "",
+    "status" : "unknown",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  }, {
+    "name" : "setup",
+    "time" : {
+      "start" : 1643625296116,
+      "stop" : 1643625367286,
+      "duration" : 71170
+    },
+    "description" : "",
+    "status" : "unknown",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "callStopRecording",
+    "time" : {
+      "start" : 1643625438158,
+      "stop" : 1643625443824,
+      "duration" : 5666
+    },
+    "description" : "",
+    "status" : "unknown",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  }, {
+    "name" : "close",
+    "time" : {
+      "start" : 1643625458316,
+      "stop" : 1643625468938,
+      "duration" : 10622
+    },
+    "description" : "",
+    "status" : "unknown",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "package",
+    "value" : "com.trionxt.webdriver.scenarios.DemoTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.trionxt.webdriver.scenarios.DemoTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "login2"
+  }, {
+    "name" : "parentSuite",
+    "value" : "First Suite"
+  }, {
+    "name" : "suite",
+    "value" : "loginTest3"
+  }, {
+    "name" : "subSuite",
+    "value" : "com.trionxt.webdriver.scenarios.DemoTest"
+  }, {
+    "name" : "host",
+    "value" : "Shubham-PC"
+  }, {
+    "name" : "thread",
+    "value" : "13108@Shubham-PC.main(1)"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "38b29b21542ac002",
+      "status" : "passed",
+      "time" : {
+        "start" : 1643623381867,
+        "stop" : 1643623386113,
+        "duration" : 4246
+      }
+    }, {
+      "uid" : "17eb4cf64413d8f0",
+      "status" : "passed",
+      "time" : {
+        "start" : 1643623162790,
+        "stop" : 1643623166717,
+        "duration" : 3927
+      }
+    }, {
+      "uid" : "2486c0b9c29643b3",
+      "status" : "passed",
+      "time" : {
+        "start" : 1642487850269,
+        "stop" : 1642487864925,
+        "duration" : 14656
+      }
+    }, {
+      "uid" : "17203a6303dddbb9",
+      "status" : "passed",
+      "time" : {
+        "start" : 1642486765192,
+        "stop" : 1642486771986,
+        "duration" : 6794
+      }
+    }, {
+      "uid" : "a27a61f351af7f36",
+      "status" : "passed",
+      "time" : {
+        "start" : 1642486163769,
+        "stop" : 1642486166462,
+        "duration" : 2693
+      }
+    } ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "52fa9b83f54637a9",
+        "reportUrl" : "http://localhost:9090/jenkins/job/mySuperMon%20Allure%20Report/1/allure/#testresult/52fa9b83f54637a9",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642486765192,
+          "stop" : 1642486771986,
+          "duration" : 6794
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "b9ca347c893da7a8.json",
+  "parameterValues" : [ ]
+}

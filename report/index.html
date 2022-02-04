@@ -1,0 +1,472 @@
+      <link href="./css.css"
+         rel="stylesheet">
+      <link rel="stylesheet" href="./bootstrap.min.css">
+        <link rel="stylesheet" href="./tabulator.css">
+      <script src="./jquery.min.js"></script>
+      <script src="./bootstrap.min.js"></script>
+       <script type="text/javascript" src="./jquery.canvasjs.min.js"></script>
+      <script type="text/javascript" src="./moment.min.js"></script>
+      <script type="text/javascript" src="./sql-formatter.min.js"></script>
+        <script type="text/javascript" src="./tabulator.js"></script>
+       <!--  <script type="text/javascript" src="./jquery_wrapper.js"></script> -->
+      <style>
+         h1 {
+            font-size: 40px;
+            color: #08090d;
+            text-align: center;
+         }
+         h1 span {
+         font-size: 25px;
+         color: #477dd7;
+         }
+         h2 {
+         font-family: "Open Sans Condensed", sans-serif;
+         font-size: 18px;
+         }
+         .margin-bottom {
+         margin-bottom: 50px;
+         }
+         .canvasjs-chart-credit
+         {
+         display: none !important;
+         }
+         .mt-0 {
+         margin-top: 40px !important;
+         }
+         #sqlTextArea
+         {
+         opacity: 0;
+         margin-top: -35px;
+         }
+         #usecaseDetails
+         {
+         display: none;
+         }
+         .cursor-pointer
+         {cursor: pointer;}
+      </style>
+   <body>
+      <div class="container">
+         <h3 id="reportName">Supermon Analysis Report</h3>
+        <div class="row">
+            <div class="col-md-12">
+               <!--  <h3>pie chart</h3>   -->
+               <div id="pieChartContainer" style="height: 300px; width: 100%;"></div>
+            </div>
+            <br /><br />
+            <div class="row">
+               <div class="col-md-12 mt-0">
+                  <div id="table-1" class="margin-bottom"></div>
+               </div>
+            </div>
+            <div class="row" id="usecaseDetails-row">
+               <div class="col-md-12">
+                  <h3 id="details-title"></h3>
+                  <div id="table-2" class="margin-bottom"></div>
+               </div>
+            </div>
+            <div class="row" id="usecaseDetails">
+               <ul class="nav nav-tabs">
+                  <li class="active"><a data-toggle="tab" href="#mostExecuted">Most Executed SQL Statement</a></li>
+                  <li><a data-toggle="tab" onclick="return triggerEvent(event)" href="#worstExecuted">Worst Performing SQL Statement</a></li>
+               </ul>
+               <div class="tab-content">
+                  <div id="mostExecuted" class="tab-pane fade in active">
+                     <h3>Most Executed SQL Statement</h3>
+                     <div id="table-most-executed-sql-usecase" class="margin-bottom"></div>
+                  </div>
+                  <div id="worstExecuted" class="tab-pane fade">
+                     <h3>Worst Performing SQL Statement</h3>
+                     <div onload="triggerEvent(event)" id="table-worst-performing-sql-usecase" class="margin-bottom"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+             <h3>Overall Execution Result</h3>
+            <ul class="nav nav-tabs">
+               <li class="active"><a data-toggle="tab" href="#home">Most Executed SQL Statement</a></li>
+               <li><a data-toggle="tab" href="#menu1">Worst Performing SQL Statement</a></li>
+            </ul>
+            <div class="tab-content">
+               <div id="home" class="tab-pane fade in active">
+                  <h3>Most Executed SQL Statement</h3>
+                  <div id="table-most-executed-sql" class="margin-bottom"></div>
+               </div>
+               <div id="menu1" class="tab-pane fade">
+                  <h3>Worst Performing SQL Statement</h3>
+                  <div id="table-worst-performing-sql" class="margin-bottom"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Full SQL Statement</h4>
+               </div>
+               <div class="modal-body">
+                  <pre id="sqlStatement"></pre>
+                  <textarea id="sqlTextArea"></textarea>
+               </div>
+               <div class="modal-footer">
+                  <button class="btn btn-default" id="myTooltip" onclick="copyToClipboard()" onmouseout="copiedDone()">Copy to clipboard</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+      <script type="text/javascript">
+         let mostExecutedQueriesforCurrentBatch;
+         let worstQueriesforCurrentBatch;
+         $(document).ready(function () {
+             $.getJSON("response.json", function (data) {
+               //assign value
+               mostExecutedQueriesforCurrentBatch = data.data.mostExecutedQueriesforCurrentBatch;
+               worstQueriesforCurrentBatch = data.data.worstQueriesforCurrentBatch;
+
+
+         
+         var newJsonObject = [];
+         data.data.list.forEach(function(element) {
+            var obj = {};
+          
+         obj['Usecase Identifier'] = element.usecaseIdentifier;
+            
+         var starttimestamp = new Date(element.starttimestamp);
+         obj["Start Timestamp"] = moment(starttimestamp).format("YYYY-MM-DD HH:mm:ss");
+         obj["allValues"] = element.valueObjectList;
+         obj["Result In Percentage"] = element.resultInPercentage;
+         obj["Response Time"] = element.responseTime
+         obj["Result"] = element.result;
+            newJsonObject.push(obj);
+            });
+         var mostExecutedQueries = data.data.mostExecutedQueries;
+            var newMostExecutedQueries = [];
+         mostExecutedQueries.forEach(function(element) {
+            var mostExecutedQuery = {};
+          mostExecutedQuery["SQL Statement"] =element.sqlStatement;
+         mostExecutedQuery["Usecase Identifier"] = element.usecaseIdentifier;
+         mostExecutedQuery["Total Execution"] = element.execCount;
+         mostExecutedQuery["Total Execution Time"] = element.execTimeTotal;
+         mostExecutedQuery["Maximum Execution Time"] = element.execTimeMax;
+         mostExecutedQuery["Average Execution Time"] = element.execTimeAvgMS;
+         mostExecutedQuery["Total Rows Sent"] = element.sumRowsSent;
+         mostExecutedQuery["Average Rows Sent"] = element.rowsSentAvg;
+         mostExecutedQuery["Total Rows Examined"] = element.sumRowsExamined;
+         mostExecutedQuery["Maximum Wait Time"] = element.maxTimerWait;
+         mostExecutedQuery["DB Name"] = element.dbName;
+         
+            newMostExecutedQueries.push(mostExecutedQuery);
+            });
+         
+         //fetch worst query
+          var worstQueries = data.data.worstQueries;
+            var newWorstQueries = [];
+         worstQueries.forEach(function(element) {
+            var worstQuery = {};
+         worstQuery["SQL Statement"] =element.sqlStatement;
+         worstQuery["Usecase Identifier"] = element.usecaseIdentifier;
+         worstQuery["Total Execution"] = element.execCount;
+         worstQuery["Total Execution Time"] = element.execTimeTotal;
+         worstQuery["Maximum Execution Time"] = element.execTimeMax;
+         worstQuery["Average Execution Time"] = element.execTimeAvgMS;
+         worstQuery["Total Rows Sent"] = element.sumRowsSent;
+         worstQuery["Average Rows Sent"] = element.rowsSentAvg;
+         worstQuery["Total Rows Examined"] = element.sumRowsExamined;
+         worstQuery["Maximum Wait Time"] = element.maxTimerWait;
+         worstQuery["DB Name"] = element.dbName;
+           
+            newWorstQueries.push(worstQuery);
+            });
+         
+         
+         var options = {
+         title: {
+             text: "Pie Chart"
+         },
+         data: [{
+                 type: "pie",
+                 startAngle: 45,
+                 showInLegend: "true",
+                 legendText: "{label}",
+                 indexLabel: "{label} ({y})",
+                 yValueFormatString:"#,##0.#"%"",
+                 dataPoints: [
+                     { label: "Success Counts", y: data.data.successCounts ,color: "#9bbb57" },
+                     { label: "Failure Counts", y: data.data.failureCounts  ,color: "#dc3545"},
+                     { label: "Improvements Counts", y: data.data.improvements ,color :"#28a745"},
+                     { label: "Warning Counts", y: data.data.warningCounts ,color: "#ffc107"}
+                 ]
+         }]
+         };
+         $("#pieChartContainer").CanvasJSChart(options);
+
+                     //define table
+            var mostExecutedSQLUsecase = new Tabulator("#table-most-executed-sql", {
+                data:newMostExecutedQueries, 
+                layout:"fitColumns",
+                pagination:"local",
+                paginationSize:10,
+                paginationSizeSelector:[10, 20, 30, 100],
+                movableColumns:false,
+                 reactiveData:true, 
+                columns:[
+        {title:"SQL Statement", field:"SQL Statement", headerFilter:"input",  formatter:function(cell, formatterParams){
+        var value = cell.getValue();
+        return "<a class='cursor-pointer' onClick='showFullSQL("+JSON.stringify(value)+")'>"+value.slice(0, 25)+"</a>" ;
+    }},
+{title:"Usecase Identifier", field:"Usecase Identifier", headerFilter:"input"},
+{title:"Total Execution", field:"Total Execution", headerFilter:"input"},
+{title:"Total Execution Time", field:"Total Execution Time", headerFilter:"input"},
+{title:"Maximum Execution Time", field:"Maximum Execution Time", headerFilter:"input"},
+{title:"Average Execution Time", field:"Average Execution Time", headerFilter:"input"},
+{title:"Total Rows Sent", field:"Total Rows Sent", headerFilter:"input"},
+{title:"Average Rows Sent", field:"Average Rows Sent", headerFilter:"input"},
+{title:"Total Rows Examined", field:"Total Rows Examined", headerFilter:"input"},
+{title:"Maximum Wait Time", field:"Maximum Wait Time", headerFilter:"input"},
+{title:"DB Name", field:"DB Name", headerFilter:"input"}],
+            });
+
+            //define table
+            wrostExecutedSQLUsecase = new Tabulator("#table-worst-performing-sql", {
+                data:newWorstQueries,
+                layout:"fitColumns",
+                pagination:"local",
+                paginationSize:10,
+                paginationSizeSelector:[10, 20, 30, 100],
+                movableColumns:false,
+                 reactiveData:true, 
+                columns:[
+        {title:"SQL Statement", field:"SQL Statement",width: 180, headerFilter:"input", formatter:function(cell, formatterParams){
+        var value = cell.getValue();
+        return "<a class='cursor-pointer' onClick='showFullSQL("+JSON.stringify(value)+")'>"+value.slice(0, 25)+"</a>" ;
+    }},
+{title:"Usecase Identifier", width: 165,field:"Usecase Identifier", headerFilter:"input"},
+{title:"Total Execution",width: 165, field:"Total Execution", headerFilter:"input"},
+{title:"Total Execution Time", width: 165,field:"Total Execution Time", headerFilter:"input"},
+{title:"Maximum Execution Time", width: 165,field:"Maximum Execution Time", headerFilter:"input"},
+{title:"Average Execution Time", width: 165,field:"Average Execution Time", headerFilter:"input"},
+{title:"Total Rows Sent", width: 165,field:"Total Rows Sent", headerFilter:"input"},
+{title:"Average Rows Sent", width: 165,field:"Average Rows Sent", headerFilter:"input"},
+{title:"Total Rows Examined", field:"Total Rows Examined", headerFilter:"input"},
+{title:"Maximum Wait Time",width: 165, field:"Maximum Wait Time", headerFilter:"input"},
+{title:"DB Name", field:"DB Name",width: 150, headerFilter:"input"}],
+            });
+
+             //wrostPerformingSQLBatch.setData(topWorstQueries);
+          //wrostPerformingSQLBatch.resize();
+          wrostExecutedSQLUsecase.redraw(true);
+
+            //define table
+            var table = new Tabulator("#table-1", {
+                data:newJsonObject,
+                //autoColumns:true,
+                layout:"fitColumns",
+                pagination:"local",
+                paginationSize:10,
+                paginationSizeSelector:[10, 20, 30, 100],
+               movableColumns:false,
+                reactiveData:true, 
+            columns:[
+        {title:"Usecase Identifier", field:"Usecase Identifier", headerFilter:"input", formatter:function(cell, formatterParams){
+        var value = cell.getValue();
+        return "<a class='cursor-pointer' onClick='showDetails("+JSON.stringify(cell._cell.row.data.allValues)+","+JSON.stringify(value)+")'>"+value+"</a>";
+    }},
+         {title:"Start Timestamp", field:"Start Timestamp", headerFilter:"input"},
+          {title:"Result In Percentage", field:"Result In Percentage", headerFilter:"input"},
+          {title:"Response Time", field:"Response Time", headerFilter:"input"},
+           {title:"Result", field:"Result", headerFilter:"input", formatter:function(cell, formatterParams){
+       var value = cell.getValue();
+        if(value == "FAILURE"){
+            return "<span style='color:#dc3545; font-weight:bold;'>" + value + "</span>";
+        }
+        else if(value == "WARNING"){
+            return "<span style='color:#ffc107; font-weight:bold;'>" + value + "</span>";
+        }
+        else if(value == "IMPROVEMENT"){
+            return "<span style='color:#28a745; font-weight:bold;'>" + value + "</span>";
+        }
+        else{
+            return "<span style='color:#9bbb57; font-weight:bold;'>" + value + "</span>";
+        }
+    }}],
+            });
+                
+             });
+         });
+         
+         function showFullSQL(sql){
+            $("#sqlStatement").html(sqlFormatter.format(sql));
+              $("#sqlTextArea").html(sqlFormatter.format(sql));
+            $('#myModal').modal('show');
+            //alert(sql);
+         }
+         
+         function showDetails(a, usecaseIdentifier){
+            //worst query
+            $("#usecaseDetails").css("display","block");
+            var topWorstQueries = [];
+         worstQueriesforCurrentBatch.forEach(function(element) {
+           if(element.usecaseIdentifier == usecaseIdentifier)
+           {
+             var worstQuery = {};
+
+         worstQuery["SQL Statement"] =element.sqlStatement;
+             
+        // worstQuery["SQL Statement"] = element.stmtText.slice(0, 25);
+         worstQuery["Usecase Identifier"] = element.usecaseIdentifier;
+         worstQuery["SQL Statement"] =element.sqlStatement;
+         worstQuery["Usecase Identifier"] = element.usecaseIdentifier;
+         worstQuery["Total Execution"] = element.execCount;
+         worstQuery["Total Execution Time"] = element.execTimeTotal;
+         worstQuery["Maximum Execution Time"] = element.execTimeMax;
+         worstQuery["Average Execution Time"] = element.execTimeAvgMS;
+         worstQuery["Total Rows Sent"] = element.sumRowsSent;
+         worstQuery["Average Rows Sent"] = element.rowsSentAvg;
+         worstQuery["Total Rows Examined"] = element.sumRowsExamined;
+         worstQuery["Maximum Wait Time"] = element.maxTimerWait;
+         worstQuery["DB Name"] = element.dbName;
+           topWorstQueries.push(worstQuery);
+           }
+         });
+         
+          wrostPerformingSQLBatch = new Tabulator("#table-worst-performing-sql-usecase", {
+               //data:topWorstQueries,
+                layout:"fitColumns",
+                movableColumns:false,
+                 reactiveData:true, 
+                columns:[
+        {title:"SQL Statement", field:"SQL Statement",width: 240, headerFilter:"input", formatter:function(cell, formatterParams){
+        var value = cell.getValue();
+         return "<a class='cursor-pointer' onClick='showFullSQL("+JSON.stringify(value)+")'>"+value.slice(0, 25)+"</a>" ;
+    }},
+{title:"Usecase Identifier", width: 165, field:"Usecase Identifier", headerFilter:"input"},
+{title:"Total Execution", width: 165, field:"Total Execution", headerFilter:"input"},
+{title:"Total Execution Time", width: 165, field:"Total Execution Time", headerFilter:"input"},
+{title:"Maximum Execution Time", width: 165, field:"Maximum Execution Time", headerFilter:"input"},
+{title:"Average Execution Time", width: 165, field:"Average Execution Time", headerFilter:"input"},
+{title:"Total Rows Sent", width: 165, field:"Total Rows Sent", headerFilter:"input"},
+{title:"Average Rows Sent", width: 165, field:"Average Rows Sent", headerFilter:"input"},
+{title:"Total Rows Examined", width: 165, field:"Total Rows Examined", headerFilter:"input"},
+{title:"Maimum Wait Time", width: 165, field:"Maximum Wait Time", headerFilter:"input"},
+{title:"DB Name", width: 165, field:"DB Name", headerFilter:"input"}],
+
+
+
+
+             });
+          wrostPerformingSQLBatch.setData(topWorstQueries);
+          wrostPerformingSQLBatch.setSort([{column : 'Usecase Identifier', dir :'asc'}]);
+          //wrostPerformingSQLBatch.resize();
+          wrostExecutedSQLUsecase.setColumnLayout(["fitColumns"]);
+          wrostPerformingSQLBatch.redraw(true);
+        // $('#table-worst-performing-sql-usecase').createTable(topWorstQueries, {});
+          
+         //most excuted query
+            var topMostQueries = [];
+         mostExecutedQueriesforCurrentBatch.forEach(function(element) {
+           if(element.usecaseIdentifier == usecaseIdentifier)
+           {
+             var mostQuery = {};
+             mostQuery["SQL Statement"] =element.sqlStatement;
+        
+         //mostQuery["SQL Statement"] = element.stmtText.slice(0, 25);
+         mostQuery["Usecase Identifier"] = element.usecaseIdentifier;
+         mostQuery["Total Execution"] = element.execCount;
+         mostQuery["Total Execution Time"] = element.execTimeTotal;
+         mostQuery["Maximum Execution Time"] = element.execTimeMax;
+         mostQuery["Average Execution Time"] = element.execTimeAvgMS;
+         mostQuery["Total Rows Sent"] = element.sumRowsSent;
+         mostQuery["Average Rows Sent"] = element.rowsSentAvg;
+         mostQuery["Total Rows Examined"] = element.sumRowsExamined;
+         mostQuery["Maximum Wait Time"] = element.maxTimerWait;
+         mostQuery["DB Name"] = element.dbName;
+             topMostQueries.push(mostQuery);
+           }
+         });
+         
+         var mostExecutedSQLBatch = new Tabulator("#table-most-executed-sql-usecase", {
+               data:topMostQueries,
+                layout:"fitColumns",
+                reactiveData:true, 
+                movableColumns:false,
+                columns:[
+        {title:"SQL Statement", field:"SQL Statement", headerFilter:"input", formatter:function(cell, formatterParams){
+        var value = cell.getValue();
+       return "<a class='cursor-pointer' onClick='showFullSQL("+JSON.stringify(value)+")'>"+value.slice(0, 25)+"</a>" ;
+    }},
+{title:"Usecase Identifier", field:"Usecase Identifier", headerFilter:"input"},
+{title:"Total Execution", field:"Total Execution", headerFilter:"input"},
+{title:"Total Execution Time", field:"Total Execution Time", headerFilter:"input"},
+{title:"Maximum Execution Time", field:"Maximum Execution Time", headerFilter:"input"},
+{title:"Average Execution Time", field:"Average Execution Time", headerFilter:"input"},
+{title:"Total Rows Sent", field:"Total Rows Sent", headerFilter:"input"},
+{title:"Average Rows Sent", field:"Average Rows Sent", headerFilter:"input"},
+{title:"Total Rows Examined", field:"Total Rows Examined", headerFilter:"input"},
+{title:"Maximum Wait Time", field:"Maximum Wait Time", headerFilter:"input"},
+{title:"DB Name", field:"DB Name", headerFilter:"input"}],             
+             
+             
+             
+             });
+
+         // $('#').createTable(topMostQueries, {});      
+         
+            $("#details-title").html("Details for : "+usecaseIdentifier);
+             var Details = [];
+         a.forEach(function(element) {
+            var obj = {};
+         obj['Column Title'] = element.columnTitle;
+          obj['Old Value'] = element.oldValue;
+           obj['New Value'] = element.newValue;
+            obj['Percentage'] = element.comparedNumber;
+            Details.push(obj);
+            });
+         
+            //define table
+            var dataTable = new Tabulator("#table-2", {
+                data:Details,
+                layout:"fitColumns",
+                pagination:"local",
+                paginationSize:10,
+                paginationSizeSelector:[10, 20, 30, 100],
+               movableColumns:false,
+               reactiveData:true, 
+                  columns:[
+{title:"Column Title", field:"Column Title", headerFilter:"input"},
+{title:"Old Value", field:"Old Value", headerFilter:"input"},
+{title:"New Value", field:"New Value", headerFilter:"input"},
+{title:"Percentage", field:"Percentage", headerFilter:"input"}],
+            });
+           $("#usecaseDetails").css("display","block");
+           $('html, body').animate({
+                scrollTop: $("#usecaseDetails-row").offset().top
+            }, 2000);
+         }
+         
+         function copyToClipboard() {
+            var copyText = document.getElementById("sqlTextArea");
+            copyText.select();
+            document.execCommand("copy");
+            
+            var tooltip = document.getElementById("myTooltip");
+            tooltip.innerHTML = "Copied done";
+         }
+         
+         function copiedDone() {
+         var tooltip = document.getElementById("myTooltip");
+         tooltip.innerHTML = "Copy to clipboard";
+         }
+
+         function triggerEvent(event){
+            //document.getElementById('worstExecuted').style.display = 'block';
+            //wrostPerformingSQLBatch.setSort([{column : 'Usecase Identifier', dir :'asc'}]);
+            //wrostPerformingSQLBatch.redraw();
+            //return true;
+         }
+      </script>

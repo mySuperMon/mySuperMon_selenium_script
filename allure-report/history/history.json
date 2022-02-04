@@ -1,0 +1,147 @@
+{
+  "2940786e82604da18f4d04361442cada" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 2,
+      "unknown" : 0,
+      "total" : 2
+    },
+    "items" : [ {
+      "uid" : "a0186579dd90466f",
+      "reportUrl" : "http://localhost:9090/jenkins/job/mySuperMon%20Allure%20Report/2/allure/#testresult/a0186579dd90466f",
+      "status" : "passed",
+      "time" : {
+        "start" : 1643625448136,
+        "stop" : 1643625452429,
+        "duration" : 4293
+      }
+    }, {
+      "uid" : "e43a0eec48d263b6",
+      "reportUrl" : "http://localhost:9090/jenkins/job/mySuperMon%20Allure%20Report/1/allure/#testresult/e43a0eec48d263b6",
+      "status" : "passed",
+      "time" : {
+        "start" : 1642486779203,
+        "stop" : 1642486783497,
+        "duration" : 4294
+      }
+    } ]
+  },
+  "436693ecc2dbb68737e415dad52a9b35" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 2,
+      "unknown" : 0,
+      "total" : 2
+    },
+    "items" : [ {
+      "uid" : "c69f4cf576e52cc2",
+      "reportUrl" : "http://localhost:9090/jenkins/job/mySuperMon%20Allure%20Report/2/allure/#testresult/c69f4cf576e52cc2",
+      "status" : "passed",
+      "time" : {
+        "start" : 1643625406986,
+        "stop" : 1643625410976,
+        "duration" : 3990
+      }
+    }, {
+      "uid" : "8faff63baa80a939",
+      "reportUrl" : "http://localhost:9090/jenkins/job/mySuperMon%20Allure%20Report/1/allure/#testresult/8faff63baa80a939",
+      "status" : "passed",
+      "time" : {
+        "start" : 1642486737752,
+        "stop" : 1642486742498,
+        "duration" : 4746
+      }
+    } ]
+  },
+  "9a075b02af74b97106f0881f95011473" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 2,
+      "unknown" : 0,
+      "total" : 2
+    },
+    "items" : [ {
+      "uid" : "199ca482fc1797a0",
+      "reportUrl" : "http://localhost:9090/jenkins/job/mySuperMon%20Allure%20Report/2/allure/#testresult/199ca482fc1797a0",
+      "status" : "passed",
+      "time" : {
+        "start" : 1643625388167,
+        "stop" : 1643625390817,
+        "duration" : 2650
+      }
+    }, {
+      "uid" : "9f8133e5b1d10f72",
+      "reportUrl" : "http://localhost:9090/jenkins/job/mySuperMon%20Allure%20Report/1/allure/#testresult/9f8133e5b1d10f72",
+      "status" : "passed",
+      "time" : {
+        "start" : 1642486723376,
+        "stop" : 1642486728060,
+        "duration" : 4684
+      }
+    } ]
+  },
+  "6c2b1b60e02e549b2c96df1a814f6a96" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 2,
+      "unknown" : 0,
+      "total" : 2
+    },
+    "items" : [ {
+      "uid" : "b41080fa5bd494a1",
+      "reportUrl" : "http://localhost:9090/jenkins/job/mySuperMon%20Allure%20Report/2/allure/#testresult/b41080fa5bd494a1",
+      "status" : "passed",
+      "time" : {
+        "start" : 1643625421467,
+        "stop" : 1643625423630,
+        "duration" : 2163
+      }
+    }, {
+      "uid" : "7e88738e73ee4c21",
+      "reportUrl" : "http://localhost:9090/jenkins/job/mySuperMon%20Allure%20Report/1/allure/#testresult/7e88738e73ee4c21",
+      "status" : "passed",
+      "time" : {
+        "start" : 1642486749950,
+        "stop" : 1642486755089,
+        "duration" : 5139
+      }
+    } ]
+  },
+  "879fa06f69c345a2aae7cc07eebdec6" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 2,
+      "unknown" : 0,
+      "total" : 2
+    },
+    "items" : [ {
+      "uid" : "b9ca347c893da7a8",
+      "reportUrl" : "http://localhost:9090/jenkins/job/mySuperMon%20Allure%20Report/2/allure/#testresult/b9ca347c893da7a8",
+      "status" : "passed",
+      "time" : {
+        "start" : 1643625432457,
+        "stop" : 1643625438156,
+        "duration" : 5699
+      }
+    }, {
+      "uid" : "52fa9b83f54637a9",
+      "reportUrl" : "http://localhost:9090/jenkins/job/mySuperMon%20Allure%20Report/1/allure/#testresult/52fa9b83f54637a9",
+      "status" : "passed",
+      "time" : {
+        "start" : 1642486765192,
+        "stop" : 1642486771986,
+        "duration" : 6794
+      }
+    } ]
+  }
+}
