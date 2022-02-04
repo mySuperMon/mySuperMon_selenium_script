@@ -1,9 +1,0 @@
-[ {
-  "buildOrder" : 1,
-  "reportUrl" : "http://localhost:9090/jenkins/job/mySuperMon%20Allure%20Report/1/allure",
-  "reportName" : "AllureReport",
-  "data" : {
-    "run" : 5,
-    "retry" : 5
-  }
-} ]
